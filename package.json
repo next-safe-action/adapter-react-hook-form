@@ -1,0 +1,113 @@
+{
+	"name": "@next-safe-action/adapter-react-hook-form",
+	"version": "0.0.0-development",
+	"private": false,
+	"description": "This adapter offers a way to seamlessly integrate next-safe-action with react-hook-form.",
+	"main": "./dist/index.mjs",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.mts",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": "./dist/index.mjs",
+		"./hooks": "./dist/hooks.mjs"
+	},
+	"typesVersions": {
+		"*": {
+			".": [
+				"./dist/index.d.mts"
+			],
+			"hooks": [
+				"./dist/hooks.d.mts"
+			]
+		}
+	},
+	"funding": [
+		{
+			"type": "github",
+			"url": "https://github.com/sponsors/TheEdoRan"
+		},
+		{
+			"type": "paypal",
+			"url": "https://www.paypal.com/donate/?hosted_button_id=ES9JRPSC66XKW"
+		}
+	],
+	"scripts": {
+		"postinstall": "husky",
+		"lint": "tsc && prettier --write . && eslint .",
+		"build": "tsup",
+		"deploy": "semantic-release"
+	},
+	"keywords": [
+		"next",
+		"nextjs",
+		"react",
+		"rsc",
+		"react server components",
+		"mutation",
+		"action",
+		"actions",
+		"react actions",
+		"next actions",
+		"server actions",
+		"next-safe-action",
+		"next safe action",
+		"react-hook-form",
+		"react hook form",
+		"react forms"
+	],
+	"author": "Edoardo Ranghieri",
+	"license": "MIT",
+	"engines": {
+		"node": ">=18.17"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.2.0",
+		"@types/node": "^20.14.11",
+		"@types/react": "^18.3.1",
+		"@types/react-dom": "18.3.0",
+		"eslint": "^8.57.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-define-config": "^2.1.0",
+		"eslint-plugin-react-hooks": "^4.6.2",
+		"prettier": "^3.2.5",
+		"react": "18.3.1",
+		"semantic-release": "^23.0.8",
+		"tsup": "^8.0.2",
+		"tsx": "^4.11.2",
+		"typescript": "^5.5.4",
+		"typescript-eslint": "^7.8.0",
+		"next-safe-action": "^7.6.2",
+		"react-hook-form": "^7.52.2",
+		"@hookform/resolvers": "^3.9.0",
+		"@commitlint/cli": "^19.3.0",
+		"@commitlint/config-conventional": "^19.2.2",
+		"@manypkg/cli": "^0.21.4",
+		"commitizen": "^4.3.0",
+		"cz-conventional-changelog": "^3.3.0",
+		"husky": "^9.0.11",
+		"is-ci": "^3.0.1"
+	},
+	"peerDependencies": {
+		"next": ">= 14.0.0",
+		"react": ">= 18.2.0",
+		"react-dom": ">= 18.2.0",
+		"next-safe-action": ">= 7.6.0",
+		"react-hook-form": ">= 7.0.0",
+		"@hookform/resolvers": ">= 3.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/next-safe-action/adapter-react-hook-form.git"
+	},
+	"packageManager": "pnpm@9.7.1+sha512.faf344af2d6ca65c4c5c8c2224ea77a81a5e8859cbc4e06b1511ddce2f0151512431dd19e6aff31f2c6a8f5f2aced9bd2273e1fed7dd4de1868984059d2c4247"
+}

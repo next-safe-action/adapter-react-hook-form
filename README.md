@@ -74,7 +74,7 @@ export const loginAction = actionClient
 ```tsx
 "use client";
 
-import { useHookFormAction } from "@next-safe-action/adapter-react-hook-form";
+import { useHookFormAction } from "@next-safe-action/adapter-react-hook-form/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "./validation";
 import { loginAction } from "./login-action";
@@ -160,7 +160,7 @@ export const addTodoAction = actionClient
 ```tsx
 "use client";
 
-import { useHookFormOptimisticAction } from "@next-safe-action/adapter-react-hook-form";
+import { useHookFormOptimisticAction } from "@next-safe-action/adapter-react-hook-form/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addTodoSchema } from "./validation";
 import { addTodoAction } from "./addtodo-action";
@@ -218,9 +218,9 @@ For more advanced stuff, you can use this hook to get back the memoized mapped v
 ```tsx
 "use client";
 
+import { useHookFormActionErrorMapper } from "@next-safe-action/adapter-react-hook-form/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "./validation";
-import { useHookFormActionErrorMapper } from "./hooks";
 import { loginAction } from "./login-action";
 import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";

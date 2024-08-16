@@ -245,7 +245,7 @@ export function CustomForm() {
 ### Parameters
 
 - `validationErrors`: next-safe-action object of `ValidationErrors`, or `undefined` (required)
-- `props`: `joinBy` from `ErrorMapperProps` type. It's used to determine how to join the error messages, if more than one is present in the errors array. It defauls to `" "`  (optional)
+- `props`: `joinBy` from `ErrorMapperProps` type. It's used to determine how to join the error messages, if more than one is present in the errors array. It defaults to `" "`  (optional)
 
 ### Return values (object)
 - `hookFormValidationErrors`: object of mapped errors with `FieldErrors` type, compatible with react-hook-form
@@ -276,7 +276,7 @@ async function advancedStuff() {
 ### Parameters
 
 - `validationErrors`: next-safe-action object of `ValidationErrors`, or `undefined` (required)
-- `props`: `joinBy` from `ErrorMapperProps` type. It's used to determine how to join the error messages, if more than one is present in the errors array. It defauls to `" "`  (optional)
+- `props`: `joinBy` from `ErrorMapperProps` type. It's used to determine how to join the error messages, if more than one is present in the errors array. It defaults to `" "`  (optional)
 
 ### Return value
 - mapped errors: object of mapped errors with `FieldErrors` type, compatible with react-hook-form

@@ -207,7 +207,7 @@ export function AddTodoForm({ todos }: Props) {
 
 ## `useHookFormActionErrorMapper`
 
-For more advanced stuff, you can use this hook to get back the memoized mapped validation errors of the action. It can be useful for cases when you need to use both `useAction` and `useForm` in your Client Component, for a particular task, or when you want to create custom hooks.
+For more control over the execution flow, you can use this hook to get back the memoized mapped validation errors of the action. It can be useful for cases when you need to use both `useAction` and `useForm` in your Client Component, for a particular task, or when you want to create custom hooks.
 
 ### Example (Client Component)
 

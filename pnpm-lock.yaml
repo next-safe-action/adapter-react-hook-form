@@ -64,8 +64,8 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       next-safe-action:
-        specifier: ^7.6.2
-        version: 7.6.2(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^7.6.4
+        version: 7.6.4(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       prettier:
         specifier: ^3.2.5
         version: 3.3.3
@@ -1905,8 +1905,8 @@ packages:
   nerf-dart@1.0.0:
     resolution: {integrity: sha512-EZSPZB70jiVsivaBLYDCyntd5eH8NTSMOn3rB+HxwdmKThGELLdYv8qVIMWvZEFy9w8ZZpW9h9OB32l1rGtj7g==}
 
-  next-safe-action@7.6.2:
-    resolution: {integrity: sha512-lqOmV1wmnYafI/xnUxRfX3dkx67cDzJDrnZCnPoU4zMSC1A1aq47ZGXsmLM0AnlOOo4dNPZNFvUmNn+iSH1OBg==}
+  next-safe-action@7.6.4:
+    resolution: {integrity: sha512-1NiwxcW5gr6aBjLph5/VTKOT8xFrmtbzPa5RyQCDuJ/T9rq4Wkw8kC6DSrsBeVqf1fhemFmQCuH7bH9uUr9/Ig==}
     engines: {node: '>=18.17'}
     peerDependencies:
       '@sinclair/typebox': '>= 0.33.3'
@@ -4704,7 +4704,7 @@ snapshots:
 
   nerf-dart@1.0.0: {}
 
-  next-safe-action@7.6.2(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  next-safe-action@7.6.4(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       next: 14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1

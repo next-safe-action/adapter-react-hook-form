@@ -86,7 +86,7 @@
 		"tsx": "^4.11.2",
 		"typescript": "^5.5.4",
 		"typescript-eslint": "^7.8.0",
-		"next-safe-action": "^7.6.2",
+		"next-safe-action": "^7.6.4",
 		"react-hook-form": "^7.52.2",
 		"@hookform/resolvers": "^3.9.0",
 		"@commitlint/cli": "^19.3.0",

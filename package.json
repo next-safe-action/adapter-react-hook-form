@@ -34,7 +34,7 @@
 		}
 	],
 	"scripts": {
-		"postinstall": "husky",
+		"prepare": "is-ci || husky",
 		"lint": "tsc && prettier --write . && eslint .",
 		"build": "tsup",
 		"deploy": "semantic-release"

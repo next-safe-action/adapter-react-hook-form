@@ -2,30 +2,14 @@
 
 import type { ValidationErrors } from "next-safe-action";
 import type { Infer, InferIn, Schema } from "next-safe-action/adapters/types";
-import type { HookBaseUtils, HookCallbacks, HookSafeActionFn } from "next-safe-action/hooks";
+import type { HookSafeActionFn } from "next-safe-action/hooks";
 import { useAction, useOptimisticAction } from "next-safe-action/hooks";
 import * as React from "react";
-import type { Resolver, UseFormProps } from "react-hook-form";
+import type { Resolver } from "react-hook-form";
 import { useForm } from "react-hook-form";
+import type { HookProps, UseHookFormActionHookReturn, UseHookFormOptimisticActionHookReturn } from "./hooks.types";
 import type { ErrorMapperProps } from "./index";
 import { mapToHookFormErrors } from "./index";
-
-/**
- * Optional props for `useHookFormAction` and `useHookFormOptimisticAction`.
- */
-export type HookProps<
-	ServerError,
-	S extends Schema | undefined,
-	BAS extends readonly Schema[],
-	CVE,
-	CBAVE,
-	Data,
-	FormContext = any,
-> = {
-	errorMapProps?: ErrorMapperProps;
-	actionProps?: HookBaseUtils<S> & HookCallbacks<ServerError, S, BAS, CVE, CBAVE, Data>;
-	formProps?: Omit<UseFormProps<S extends Schema ? Infer<S> : any, FormContext>, "resolver">;
-};
 
 /**
  * For more advanced use cases where you want full customization of the hooks used, you can
@@ -70,7 +54,7 @@ export function useHookFormAction<
 	safeAction: HookSafeActionFn<ServerError, S, BAS, CVE, CBAVE, Data>,
 	hookFormResolver: Resolver<S extends Schema ? Infer<S> : any, FormContext>,
 	props?: HookProps<ServerError, S, BAS, CVE, CBAVE, Data, FormContext>
-) {
+): UseHookFormActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, FormContext> {
 	const action = useAction(safeAction, props?.actionProps);
 
 	const { hookFormValidationErrors } = useHookFormActionErrorMapper<S>(
@@ -127,7 +111,7 @@ export function useHookFormOptimisticAction<
 			updateFn: (state: State, input: S extends Schema ? InferIn<S> : undefined) => State;
 		};
 	}
-) {
+): UseHookFormOptimisticActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, State, FormContext> {
 	const action = useOptimisticAction(safeAction, props.actionProps);
 
 	const { hookFormValidationErrors } = useHookFormActionErrorMapper<S>(
@@ -155,3 +139,5 @@ export function useHookFormOptimisticAction<
 		resetFormAndAction,
 	};
 }
+
+export * from "./hooks.types";

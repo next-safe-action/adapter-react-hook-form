@@ -3,13 +3,7 @@
 import type { ValidationErrors } from "next-safe-action";
 import type { Infer, Schema } from "next-safe-action/adapters/types";
 import type { FieldError, FieldErrors } from "react-hook-form";
-
-/**
- * Props for `mapToHookFormErrors`. Also used by the hooks.
- */
-export type ErrorMapperProps = {
-	joinBy?: string;
-};
+import type { ErrorMapperProps } from "./index.types";
 
 /**
  * Maps a validation errors object to an object of `FieldErrors` compatible with react-hook-form.
@@ -61,3 +55,5 @@ export function mapToHookFormErrors<S extends Schema | undefined>(
 	mapper(validationErrors ?? {});
 	return fieldErrors;
 }
+
+export * from "./index.types";

@@ -1,3 +1,4 @@
+import type { SafeActionFn } from "next-safe-action";
 import type { Infer, Schema } from "next-safe-action/adapters/types";
 import type {
 	HookBaseUtils,
@@ -55,9 +56,36 @@ export type UseHookFormOptimisticActionHookReturn<
 	Data,
 	State,
 	FormContext = any,
-> = {
+> = Omit<UseHookFormActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, FormContext>, "action"> & {
 	action: UseOptimisticActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, State>;
-	form: UseFormReturn<S extends Schema ? Infer<S> : any, FormContext>;
-	handleSubmitWithAction: (e?: React.BaseSyntheticEvent) => Promise<void>;
-	resetFormAndAction: () => void;
 };
+
+/**
+ * Infer the type of the return object of the `useHookFormAction` hook.
+ */
+export type InferUseHookFormActionHookReturn<T extends Function, FormContext = any> =
+	T extends SafeActionFn<
+		infer ServerError,
+		infer S extends Schema | undefined,
+		infer BAS extends readonly Schema[],
+		infer CVE,
+		infer CBAVE,
+		infer Data
+	>
+		? UseHookFormActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, FormContext>
+		: never;
+
+/**
+ * Infer the type of the return object of the `useHookFormOptimisticAction` hook.
+ */
+export type InferUseHookFormOptimisticActionHookReturn<T extends Function, State, FormContext = any> =
+	T extends SafeActionFn<
+		infer ServerError,
+		infer S extends Schema | undefined,
+		infer BAS extends readonly Schema[],
+		infer CVE,
+		infer CBAVE,
+		infer Data
+	>
+		? UseHookFormOptimisticActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, State, FormContext>
+		: never;

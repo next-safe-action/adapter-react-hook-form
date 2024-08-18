@@ -302,11 +302,99 @@ export type ErrorMapperProps = {
 Optional props for `useHookFormAction` and `useHookFormOptimisticAction`.
 
 ```typescript
-export type HookProps<ServerError, S extends Schema | undefined, BAS extends readonly Schema[], CVE, CBAVE, Data, FormContext> = {
+export type HookProps<
+  ServerError,
+  S extends Schema | undefined,
+  BAS extends readonly Schema[],
+  CVE,
+  CBAVE,
+  Data,
+  FormContext = any,
+> = {
   errorMapProps?: ErrorMapperProps;
   actionProps?: HookBaseUtils<S> & HookCallbacks<ServerError, S, BAS, CVE, CBAVE, Data>;
   formProps?: Omit<UseFormProps<S extends Schema ? Infer<S> : any, FormContext>, "resolver">;
 };
+```
+
+### `UseHookFormActionHookReturn`
+
+Type of the return object of the `useHookFormAction` hook.
+
+```typescript
+export type UseHookFormActionHookReturn<
+  ServerError,
+  S extends Schema | undefined,
+  BAS extends readonly Schema[],
+  CVE,
+  CBAVE,
+  Data,
+  FormContext = any,
+> = {
+  action: UseActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data>;
+  form: UseFormReturn<S extends Schema ? Infer<S> : any, FormContext>;
+  handleSubmitWithAction: (e?: React.BaseSyntheticEvent) => Promise<void>;
+  resetFormAndAction: () => void;
+};
+```
+
+### `UseHookFormOptimisticActionHookReturn`
+
+Type of the return object of the `useHookFormOptimisticAction` hook.
+
+```typescript
+export type UseHookFormOptimisticActionHookReturn<
+  ServerError,
+  S extends Schema | undefined,
+  BAS extends readonly Schema[],
+  CVE,
+  CBAVE,
+  Data,
+  State,
+  FormContext = any,
+> = Omit<UseHookFormActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, FormContext>, "action"> & {
+  action: UseOptimisticActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, State>;
+};
+```
+
+## Infer types
+
+You can use these utility types exported from the `/hooks` path to infer the return types of the hooks.
+
+### `InferUseHookFormActionHookReturn`
+
+Infer the type of the return object of the `useHookFormAction` hook.
+
+```typescript
+export type InferUseHookFormActionHookReturn<T extends Function, FormContext = any> =
+  T extends SafeActionFn<
+    infer ServerError,
+    infer S extends Schema | undefined,
+    infer BAS extends readonly Schema[],
+    infer CVE,
+    infer CBAVE,
+    infer Data
+  >
+    ? UseHookFormActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, FormContext>
+    : never;
+```
+
+### `InferUseHookFormOptimisticActionHookReturn`
+
+Infer the type of the return object of the `useHookFormOptimisticAction` hook.
+
+```typescript
+export type InferUseHookFormOptimisticActionHookReturn<T extends Function, State, FormContext = any> =
+  T extends SafeActionFn<
+    infer ServerError,
+    infer S extends Schema | undefined,
+    infer BAS extends readonly Schema[],
+    infer CVE,
+    infer CBAVE,
+    infer Data
+  >
+    ? UseHookFormOptimisticActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, State, FormContext>
+    : never;
 ```
 
 # License

@@ -16,7 +16,7 @@ This adapter offers a way to seamlessly integrate [next-safe-action](https://git
 # Installation
 
 ```sh
-npm i next-safe-action react-hook-form @hookform/resolvers @next-safe-action/adapter-react-hook-form # or yarn, pnpm
+npm i next-safe-action react-hook-form @hookform/resolvers @next-safe-action/adapter-react-hook-form
 ```
 
 # Hooks

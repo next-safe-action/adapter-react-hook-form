@@ -112,7 +112,7 @@ export function LoginForm() {
 
 ## `useHookFormOptimisticAction`
 
-This hook is a wrapper around `useAction` from next-safe-action and `useForm` from react-hook-form that makes it much easier to use safe actions with react-hook-form. It also maps validation errors to `FieldErrors` compatible with react-hook-form.
+This hook is a wrapper around `useOptimisticAction` from next-safe-action and `useForm` from react-hook-form that makes it much easier to use safe actions with react-hook-form. It also maps validation errors to `FieldErrors` compatible with react-hook-form.
 
 ### Example (add todo)
 
@@ -202,7 +202,7 @@ export function AddTodoForm({ todos }: Props) {
 
 - `safeAction`: the safe action (required)
 - `hookFormResolver`: a react-hook-form validation resolver (required)
-- `props`: props for `useAction`, `useForm` and error mapper. `actionProps.currentState` and `actionProps.updateFn` are required by the `useOptimisticAction` hook used under the hood, the rest are optional. (required/optional)
+- `props`: props for `useOptimisticAction`, `useForm` and error mapper. `actionProps.currentState` and `actionProps.updateFn` are required by the `useOptimisticAction` hook used under the hood, the rest are optional. (required/optional)
 
 ### Return values (object)
 

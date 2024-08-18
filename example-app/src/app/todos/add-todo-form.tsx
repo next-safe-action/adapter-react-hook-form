@@ -2,12 +2,10 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-	useHookFormAction,
-	useHookFormOptimisticAction,
+  useHookFormOptimisticAction
 } from "@next-safe-action/adapter-react-hook-form/hooks";
-import { addTodoSchema } from "./add-todo-validation";
 import { addTodoAction } from "./add-todo-action";
-import { useEffect } from "react";
+import { addTodoSchema } from "./add-todo-validation";
 
 type Props = {
 	todos: string[];
@@ -28,14 +26,6 @@ export function AddTodoForm({ todos }: Props) {
 				mode: "onChange",
 			},
 		});
-
-	useEffect(() => {
-		form.watch((_, info) => {
-			if (info.type === "change" && form.formState.errors.root) {
-				form.clearErrors("root");
-			}
-		});
-	}, [form]);
 
 	return (
 		<div className="flex flex-col space-y-6">

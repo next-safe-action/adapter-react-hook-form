@@ -302,10 +302,10 @@ export type ErrorMapperProps = {
 Optional props for `useHookFormAction` and `useHookFormOptimisticAction`.
 
 ```typescript
-export type HookProps<ServerError, S extends Schema, BAS extends readonly Schema[], CVE, CBAVE, Data> = {
+export type HookProps<ServerError, S extends Schema | undefined, BAS extends readonly Schema[], CVE, CBAVE, Data, FormContext> = {
   errorMapProps?: ErrorMapperProps;
   actionProps?: HookBaseUtils<S> & HookCallbacks<ServerError, S, BAS, CVE, CBAVE, Data>;
-  formProps?: Omit<UseFormProps<Infer<S>, any>, "resolver">;
+  formProps?: Omit<UseFormProps<S extends Schema ? Infer<S> : any, FormContext>, "resolver">;
 };
 ```
 

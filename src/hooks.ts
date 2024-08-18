@@ -13,10 +13,18 @@ import { mapToHookFormErrors } from "./index";
 /**
  * Optional props for `useHookFormAction` and `useHookFormOptimisticAction`.
  */
-export type HookProps<ServerError, S extends Schema, BAS extends readonly Schema[], CVE, CBAVE, Data> = {
+export type HookProps<
+	ServerError,
+	S extends Schema | undefined,
+	BAS extends readonly Schema[],
+	CVE,
+	CBAVE,
+	Data,
+	FormContext = any,
+> = {
 	errorMapProps?: ErrorMapperProps;
 	actionProps?: HookBaseUtils<S> & HookCallbacks<ServerError, S, BAS, CVE, CBAVE, Data>;
-	formProps?: Omit<UseFormProps<Infer<S>, any>, "resolver">;
+	formProps?: Omit<UseFormProps<S extends Schema ? Infer<S> : any, FormContext>, "resolver">;
 };
 
 /**
@@ -27,7 +35,7 @@ export type HookProps<ServerError, S extends Schema, BAS extends readonly Schema
  * @param validationErrors Validation errors object from `next-safe-action`
  * @returns Object of `FieldErrors` compatible with react-hook-form
  */
-export function useHookFormActionErrorMapper<S extends Schema>(
+export function useHookFormActionErrorMapper<S extends Schema | undefined>(
 	validationErrors: ValidationErrors<S> | undefined,
 	props?: ErrorMapperProps
 ) {
@@ -50,10 +58,18 @@ export function useHookFormActionErrorMapper<S extends Schema>(
  * @param props Optional props for both `useAction`, `useForm` hooks and error mapper
  * @returns An object containing `action` and `form` controllers, `handleActionSubmit`, and `resetFormAndAction`
  */
-export function useHookFormAction<ServerError, S extends Schema, BAS extends readonly Schema[], CVE, CBAVE, Data>(
+export function useHookFormAction<
+	ServerError,
+	S extends Schema | undefined,
+	BAS extends readonly Schema[],
+	CVE,
+	CBAVE,
+	Data,
+	FormContext = any,
+>(
 	safeAction: HookSafeActionFn<ServerError, S, BAS, CVE, CBAVE, Data>,
-	hookFormResolver: Resolver<Infer<S>, any>,
-	props?: HookProps<ServerError, S, BAS, CVE, CBAVE, Data>
+	hookFormResolver: Resolver<S extends Schema ? Infer<S> : any, FormContext>,
+	props?: HookProps<ServerError, S, BAS, CVE, CBAVE, Data, FormContext>
 ) {
 	const action = useAction(safeAction, props?.actionProps);
 
@@ -62,7 +78,7 @@ export function useHookFormAction<ServerError, S extends Schema, BAS extends rea
 		props?.errorMapProps
 	);
 
-	const form = useForm<Infer<S>>({
+	const form = useForm<S extends Schema ? Infer<S> : any, FormContext>({
 		...props?.formProps,
 		resolver: hookFormResolver,
 		errors: hookFormValidationErrors,
@@ -95,16 +111,17 @@ export function useHookFormAction<ServerError, S extends Schema, BAS extends rea
  */
 export function useHookFormOptimisticAction<
 	ServerError,
-	S extends Schema,
+	S extends Schema | undefined,
 	BAS extends readonly Schema[],
 	CVE,
 	CBAVE,
 	Data,
 	State,
+	FormContext = any,
 >(
 	safeAction: HookSafeActionFn<ServerError, S, BAS, CVE, CBAVE, Data>,
-	hookFormResolver: Resolver<Infer<S>, any>,
-	props: HookProps<ServerError, S, BAS, CVE, CBAVE, Data> & {
+	hookFormResolver: Resolver<S extends Schema ? Infer<S> : any, FormContext>,
+	props: HookProps<ServerError, S, BAS, CVE, CBAVE, Data, FormContext> & {
 		actionProps: {
 			currentState: State;
 			updateFn: (state: State, input: S extends Schema ? InferIn<S> : undefined) => State;
@@ -118,7 +135,7 @@ export function useHookFormOptimisticAction<
 		props.errorMapProps
 	);
 
-	const form = useForm<Infer<S>>({
+	const form = useForm<S extends Schema ? Infer<S> : any, FormContext>({
 		...props?.formProps,
 		resolver: hookFormResolver,
 		errors: hookFormValidationErrors,

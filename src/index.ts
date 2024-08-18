@@ -15,7 +15,7 @@ export type ErrorMapperProps = {
  * Maps a validation errors object to an object of `FieldErrors` compatible with react-hook-form.
  * You should only call this function directly for advanced use cases, and prefer exported hooks.
  */
-export function mapToHookFormErrors<S extends Schema>(
+export function mapToHookFormErrors<S extends Schema | undefined>(
 	validationErrors: ValidationErrors<S> | undefined,
 	props?: ErrorMapperProps
 ) {
@@ -23,7 +23,7 @@ export function mapToHookFormErrors<S extends Schema>(
 		return undefined;
 	}
 
-	const fieldErrors: FieldErrors<Infer<S>> = {};
+	const fieldErrors: FieldErrors<S extends Schema ? Infer<S> : any> = {};
 
 	function mapper(ve: Record<string, any>, paths: string[] = []) {
 		// Map through validation errors.

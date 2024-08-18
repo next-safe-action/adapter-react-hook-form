@@ -19,6 +19,12 @@ This adapter offers a way to seamlessly integrate [next-safe-action](https://git
 npm i next-safe-action react-hook-form @hookform/resolvers @next-safe-action/adapter-react-hook-form
 ```
 
+# Example
+
+The best way to learn how to use this adapter is to take a look at the examples. The [app](https://github.com/next-safe-action/adapter-react-hook-form/tree/main/example-app) in this repository shows you how to use the `useHookFormAction` and `useHookFormOptimisticAction` hooks:
+- [`useHookFormAction` example \(login\)](https://github.com/next-safe-action/adapter-react-hook-form/tree/main/example-app/src/app/login)
+- [`useHookFormOptimisticAction` example \(todos\)](https://github.com/next-safe-action/adapter-react-hook-form/tree/main/example-app/src/app/todos)
+
 # Hooks
 
 ## `useHookFormAction`

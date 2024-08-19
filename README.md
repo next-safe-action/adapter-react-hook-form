@@ -33,7 +33,7 @@ This hook is a wrapper around `useAction` from next-safe-action and `useForm` fr
 
 ### Example (login)
 
-1. First of all, we need a shared file to store our validation schema(s). In this case, the exported `loginSchema` Zod validator is exported from `validation.ts`:
+1. First of all, we need a shared file to store our validation schema(s). In this case, the `loginSchema` Zod validator is exported from `validation.ts`:
 
 ```ts
 import { z } from "zod";
@@ -116,7 +116,7 @@ This hook is a wrapper around `useOptimisticAction` from next-safe-action and `u
 
 ### Example (add todo)
 
-1. First of all, we need a shared file to store our validation schema(s). In this case, the exported `addTodoSchema` Zod validator is exported from `validation.ts`:
+1. First of all, we need a shared file to store our validation schema(s). In this case, the `addTodoSchema` Zod validator is exported from `validation.ts`:
 
 ```ts
 import { z } from "zod";

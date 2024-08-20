@@ -22,7 +22,7 @@ jobs:
           node-version: "20"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run lint
+      - run: pnpm run lint:lib
 
   cd:
     if: ${{ github.ref == 'refs/heads/main' }}
@@ -39,9 +39,9 @@ jobs:
           node-version: "20"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run build
+      - run: pnpm run build:lib
       - name: Release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm run deploy
+        run: pnpm run deploy:lib

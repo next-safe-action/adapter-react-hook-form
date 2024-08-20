@@ -10,7 +10,7 @@ module.exports = defineConfig({
 		project: "./tsconfig.json",
 		tsconfigRootDir: __dirname,
 	},
-	ignorePatterns: ["**/*.js", "**/*.mjs", "**/*.cjs", "dist/**", "example-app/*"],
+	ignorePatterns: ["**/*.js", "**/*.mjs", "**/*.cjs", "dist/**"],
 	rules: {
 		"@typescript-eslint/consistent-type-imports": "error",
 		"@typescript-eslint/consistent-type-exports": "error",

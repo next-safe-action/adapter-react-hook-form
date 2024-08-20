@@ -1,0 +1,19 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"ui": "stream",
+	"tasks": {
+		"build": {
+			"dependsOn": ["^build"],
+			"outputs": [".next/**", "!.next/cache/**", "dist/**", "build/**"]
+		},
+		"lint": {},
+		"deploy": {
+			"dependsOn": ["build", "lint"],
+			"env": ["NPM_TOKEN", "GITHUB_TOKEN"]
+		},
+		"dev": {
+			"cache": false,
+			"persistent": true
+		}
+	}
+}

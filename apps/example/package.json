@@ -1,6 +1,6 @@
 {
-	"name": "next-nsa-test",
-	"version": "0.1.0",
+	"name": "@apps/example",
+	"version": "0.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
@@ -10,7 +10,7 @@
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
-		"@next-safe-action/adapter-react-hook-form": "^1.0.7",
+		"@next-safe-action/adapter-react-hook-form": "workspace:*",
 		"next": "14.2.5",
 		"next-safe-action": "^7.7.0",
 		"react": "^18",

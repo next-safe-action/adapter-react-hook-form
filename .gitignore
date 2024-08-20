@@ -23,4 +23,7 @@ yarn-error.log*
 # TypeScript stuff
 *.tsbuildinfo
 
-/src/test.ts
+# Turborepo
+.turbo
+
+/packages/adapter-react-hook-form/src/test.ts

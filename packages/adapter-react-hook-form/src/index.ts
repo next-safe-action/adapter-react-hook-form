@@ -3,6 +3,7 @@
 import type { ValidationErrors } from "next-safe-action";
 import type { Infer, Schema } from "next-safe-action/adapters/types";
 import type { FieldError, FieldErrors } from "react-hook-form";
+import type {} from "zod";
 import type { ErrorMapperProps } from "./index.types";
 
 /**

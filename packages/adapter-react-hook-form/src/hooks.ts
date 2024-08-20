@@ -7,6 +7,7 @@ import { useAction, useOptimisticAction } from "next-safe-action/hooks";
 import * as React from "react";
 import type { Resolver } from "react-hook-form";
 import { useForm } from "react-hook-form";
+import type {} from "zod";
 import type { HookProps, UseHookFormActionHookReturn, UseHookFormOptimisticActionHookReturn } from "./hooks.types";
 import type { ErrorMapperProps } from "./index";
 import { mapToHookFormErrors } from "./index";

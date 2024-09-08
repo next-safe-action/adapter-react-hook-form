@@ -24,9 +24,11 @@ export function useHookFormActionErrorMapper<S extends Schema | undefined>(
 	validationErrors: ValidationErrors<S> | undefined,
 	props?: ErrorMapperProps
 ) {
+	const propsRef = React.useRef(props);
+
 	const hookFormValidationErrors = React.useMemo(
-		() => mapToHookFormErrors<S>(validationErrors, props),
-		[validationErrors, props]
+		() => mapToHookFormErrors<S>(validationErrors, propsRef.current),
+		[validationErrors]
 	);
 
 	return {

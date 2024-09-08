@@ -5,13 +5,13 @@
 	"description": "Monorepo for next-safe-action react-hook-form adapter.",
 	"scripts": {
 		"prepare": "is-ci || husky",
-		"ex": "turbo run dev --filter=@apps/playground",
+		"ex": "turbo run dev --filter=@apps/example",
 		"lint": "turbo run lint",
 		"build": "turbo run build",
 		"lint:lib": "turbo run lint --filter=@next-safe-action/adapter-react-hook-form",
 		"build:lib": "turbo run build --filter=@next-safe-action/adapter-react-hook-form",
 		"deploy:lib": "turbo run deploy --filter=@next-safe-action/adapter-react-hook-form",
-		"build:pg": "turbo run build --filter=@apps/example --force"
+		"build:ex": "turbo run build --filter=@apps/example --force"
 	},
 	"author": "Edoardo Ranghieri",
 	"license": "MIT",

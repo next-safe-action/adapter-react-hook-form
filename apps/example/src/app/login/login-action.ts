@@ -1,11 +1,11 @@
 "use server";
 
 import { ac } from "@/lib/safe-action";
-import { loginSchema } from "./login-validation";
 import { returnValidationErrors } from "next-safe-action";
+import { loginSchema } from "./login-validation";
 
 export const loginAction = ac
-	.schema(loginSchema)
+	.inputSchema(loginSchema)
 	.action(async ({ parsedInput }) => {
 		if (
 			parsedInput.username !== "admin" ||

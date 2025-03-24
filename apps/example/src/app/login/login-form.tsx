@@ -2,8 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useHookFormAction } from "@next-safe-action/adapter-react-hook-form/hooks";
-import { loginSchema } from "./login-validation";
 import { loginAction } from "./login-action";
+import { loginSchema } from "./login-validation";
 
 export function LoginForm() {
 	const { form, action, handleSubmitWithAction, resetFormAndAction } =

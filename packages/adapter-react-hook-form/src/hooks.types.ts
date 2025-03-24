@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
+
 import type { SafeActionFn } from "next-safe-action";
 import type { Infer, Schema } from "next-safe-action/adapters/types";
 import type {

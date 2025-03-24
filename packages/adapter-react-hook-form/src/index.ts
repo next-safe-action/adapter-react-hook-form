@@ -57,4 +57,4 @@ export function mapToHookFormErrors<S extends Schema | undefined>(
 	return fieldErrors;
 }
 
-export * from "./index.types";
+export type * from "./index.types";

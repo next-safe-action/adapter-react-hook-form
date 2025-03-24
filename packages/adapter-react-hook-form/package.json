@@ -68,6 +68,8 @@
 		"@types/node": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
+		"@typescript-eslint/eslint-plugin": "^8.27.0",
+		"@typescript-eslint/parser": "^8.27.0",
 		"eslint": "catalog:",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-define-config": "^2.1.0",

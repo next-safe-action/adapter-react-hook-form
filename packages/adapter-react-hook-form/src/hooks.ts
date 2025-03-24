@@ -143,4 +143,4 @@ export function useHookFormOptimisticAction<
 	};
 }
 
-export * from "./hooks.types";
+export type * from "./hooks.types";

@@ -21,15 +21,15 @@ npm i next-safe-action react-hook-form @hookform/resolvers @next-safe-action/ada
 
 # Example
 
-The best way to learn how to use this adapter is to take a look at the examples. The [app](https://github.com/next-safe-action/adapter-react-hook-form/tree/main/apps/example) in this repository shows you how to use the `useHookFormAction` and `useHookFormOptimisticAction` hooks:
-- [`useHookFormAction` example \(login\)](https://github.com/next-safe-action/adapter-react-hook-form/tree/main/apps/example/src/app/login)
-- [`useHookFormOptimisticAction` example \(todos\)](https://github.com/next-safe-action/adapter-react-hook-form/tree/main/apps/example/src/app/todos)
+The best way to learn how to use this adapter is to take a look at the examples. The [app](https://github.com/next-safe-action/adapter-react-hook-form/tree/main/apps/example) in this repository shows you how to use the `useHookFormAction()` and `useHookFormOptimisticAction()` hooks:
+- [`useHookFormAction()` example \(login\)](https://github.com/next-safe-action/adapter-react-hook-form/tree/main/apps/example/src/app/login)
+- [`useHookFormOptimisticAction()` example \(todos\)](https://github.com/next-safe-action/adapter-react-hook-form/tree/main/apps/example/src/app/todos)
 
 # Hooks
 
-## `useHookFormAction`
+## `useHookFormAction()`
 
-This hook is a wrapper around `useAction` from next-safe-action and `useForm` from react-hook-form that makes it much easier to use safe actions with react-hook-form. It also maps validation errors to `FieldErrors` compatible with react-hook-form.
+This hook is a wrapper around `useAction()` from next-safe-action and `useForm()` from react-hook-form that makes it much easier to use safe actions with react-hook-form. It also maps validation errors to `FieldErrors` compatible with react-hook-form.
 
 ### Example (login)
 
@@ -55,7 +55,7 @@ import { loginSchema } from "./validation";
 import { checkCredentials } from "@/services/auth";
 
 export const loginAction = actionClient
-  .schema(loginSchema)
+  .inputSchema(loginSchema)
   .action(async ({ parsedInput }) => {
     const valid = await checkCredentials(
       parsedInput.username,
@@ -75,7 +75,7 @@ export const loginAction = actionClient
   });
 ```
 
-3. Finally, we can use `useHookFormAction` in our Client Component, by passing to it the `loginSchema` and `loginAction` declared above:
+3. Finally, we can use `useHookFormAction()` in our Client Component, by passing to it the `loginSchema` and `loginAction()` declared above:
 
 ```tsx
 "use client";
@@ -110,9 +110,9 @@ export function LoginForm() {
 - `handleSubmitWithAction`: a function that handles form submission by automatically executing the action
 - `resetFormAndAction`: a function that resets the form and the action state
 
-## `useHookFormOptimisticAction`
+## `useHookFormOptimisticAction()`
 
-This hook is a wrapper around `useOptimisticAction` from next-safe-action and `useForm` from react-hook-form that makes it much easier to use safe actions with react-hook-form. It also maps validation errors to `FieldErrors` compatible with react-hook-form.
+This hook is a wrapper around `useOptimisticAction()` from next-safe-action and `useForm()` from react-hook-form that makes it much easier to use safe actions with react-hook-form. It also maps validation errors to `FieldErrors` compatible with react-hook-form.
 
 ### Example (add todo)
 
@@ -139,7 +139,7 @@ import { badWordsCheck } from "@/utils";
 import { saveTodoInDb } from "@/services/db";
 
 export const addTodoAction = actionClient
-  .schema(addTodoSchema)
+  .inputSchema(addTodoSchema)
   .action(async ({ parsedInput }) => {
     const containsBadWords = badWordsCheck(parsedInput.newTodo)
 
@@ -161,7 +161,7 @@ export const addTodoAction = actionClient
   });
 ```
 
-3. Finally, we can use `useHookFormOptimisticAction` in our Client Component, by passing to it the `addTodoSchema` and `addTodoAction` declared above:
+3. Finally, we can use `useHookFormOptimisticAction()` in our Client Component, by passing to it the `addTodoSchema` and `addTodoAction()` declared above:
 
 ```tsx
 "use client";
@@ -308,18 +308,10 @@ export type ErrorMapperProps = {
 Optional props for `useHookFormAction` and `useHookFormOptimisticAction`.
 
 ```typescript
-export type HookProps<
-  ServerError,
-  S extends Schema | undefined,
-  BAS extends readonly Schema[],
-  CVE,
-  CBAVE,
-  Data,
-  FormContext = any,
-> = {
+export type HookProps<ServerError, S extends StandardSchemaV1 | undefined, CVE, Data, FormContext = any> = {
   errorMapProps?: ErrorMapperProps;
-  actionProps?: HookBaseUtils<S> & HookCallbacks<ServerError, S, BAS, CVE, CBAVE, Data>;
-  formProps?: Omit<UseFormProps<S extends Schema ? Infer<S> : any, FormContext>, "resolver">;
+  actionProps?: HookCallbacks<ServerError, S, CVE, Data>;
+  formProps?: Omit<UseFormProps<InferOutputOrDefault<S, any>, FormContext>, "resolver">;
 };
 ```
 
@@ -330,15 +322,13 @@ Type of the return object of the `useHookFormAction` hook.
 ```typescript
 export type UseHookFormActionHookReturn<
   ServerError,
-  S extends Schema | undefined,
-  BAS extends readonly Schema[],
+  S extends StandardSchemaV1 | undefined,
   CVE,
-  CBAVE,
   Data,
   FormContext = any,
 > = {
-  action: UseActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data>;
-  form: UseFormReturn<S extends Schema ? Infer<S> : any, FormContext>;
+  action: UseActionHookReturn<ServerError, S, CVE, Data>;
+  form: UseFormReturn<InferOutputOrDefault<S, any>, FormContext>;
   handleSubmitWithAction: (e?: React.BaseSyntheticEvent) => Promise<void>;
   resetFormAndAction: () => void;
 };
@@ -351,15 +341,13 @@ Type of the return object of the `useHookFormOptimisticAction` hook.
 ```typescript
 export type UseHookFormOptimisticActionHookReturn<
   ServerError,
-  S extends Schema | undefined,
-  BAS extends readonly Schema[],
+  S extends StandardSchemaV1 | undefined,
   CVE,
-  CBAVE,
   Data,
   State,
   FormContext = any,
-> = Omit<UseHookFormActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, FormContext>, "action"> & {
-  action: UseOptimisticActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, State>;
+> = Omit<UseHookFormActionHookReturn<ServerError, S, CVE, Data, FormContext>, "action"> & {
+  action: UseOptimisticActionHookReturn<ServerError, S, CVE, Data, State>;
 };
 ```
 
@@ -373,15 +361,8 @@ Infer the type of the return object of the `useHookFormAction` hook.
 
 ```typescript
 export type InferUseHookFormActionHookReturn<T extends Function, FormContext = any> =
-  T extends SafeActionFn<
-    infer ServerError,
-    infer S extends Schema | undefined,
-    infer BAS extends readonly Schema[],
-    infer CVE,
-    infer CBAVE,
-    infer Data
-  >
-    ? UseHookFormActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, FormContext>
+  T extends SafeActionFn<infer ServerError, infer S extends StandardSchemaV1 | undefined, any, infer CVE, infer Data>
+    ? UseHookFormActionHookReturn<ServerError, S, CVE, Data, FormContext>
     : never;
 ```
 
@@ -391,15 +372,8 @@ Infer the type of the return object of the `useHookFormOptimisticAction` hook.
 
 ```typescript
 export type InferUseHookFormOptimisticActionHookReturn<T extends Function, State, FormContext = any> =
-  T extends SafeActionFn<
-    infer ServerError,
-    infer S extends Schema | undefined,
-    infer BAS extends readonly Schema[],
-    infer CVE,
-    infer CBAVE,
-    infer Data
-  >
-    ? UseHookFormOptimisticActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, State, FormContext>
+  T extends SafeActionFn<infer ServerError, infer S extends StandardSchemaV1 | undefined, any, infer CVE, infer Data>
+    ? UseHookFormOptimisticActionHookReturn<ServerError, S, CVE, Data, State, FormContext>
     : never;
 ```
 

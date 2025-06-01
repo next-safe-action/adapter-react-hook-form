@@ -10,14 +10,18 @@ export function LoginForm() {
 		useHookFormAction(loginAction, zodResolver(loginSchema), {
 			formProps: {
 				mode: "onChange",
-				defaultValues: {
-					transformedValue: 123,
-				},
 			},
 			actionProps: {
-				onSuccess: () => {
+				onSuccess: (args) => {
+					console.log("onSuccess called:", args);
 					window.alert("Logged in successfully!");
 					resetFormAndAction();
+				},
+				onNavigation: (args) => {
+					console.log("onNavigation called:", args);
+				},
+				onSettled: (args) => {
+					console.log("onSettled called:", args);
 				},
 			},
 		});

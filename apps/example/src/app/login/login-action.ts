@@ -2,6 +2,7 @@
 
 import { ac } from "@/lib/safe-action";
 import { returnValidationErrors } from "next-safe-action";
+import { unauthorized } from "next/navigation";
 import { loginSchema } from "./login-validation";
 
 export const loginAction = ac
@@ -11,6 +12,8 @@ export const loginAction = ac
 			parsedInput.username !== "admin" ||
 			parsedInput.password !== "password"
 		) {
+			await new Promise((resolve) => setTimeout(resolve, 1000));
+			unauthorized();
 			returnValidationErrors(loginSchema, {
 				_errors: ["Invalid username or password"],
 				username: {

@@ -4,7 +4,7 @@ import type { SafeActionFn } from "next-safe-action";
 import type { HookCallbacks, UseActionHookReturn, UseOptimisticActionHookReturn } from "next-safe-action/hooks";
 import type { UseFormProps, UseFormReturn } from "react-hook-form";
 import type { ErrorMapperProps } from "./index.types";
-import type { InferOutputOrDefault, StandardSchemaV1 } from "./standard-schema";
+import type { InferInputOrDefault, InferOutputOrDefault, StandardSchemaV1 } from "./standard-schema";
 
 /**
  * Optional props for `useHookFormAction` and `useHookFormOptimisticAction`.
@@ -12,7 +12,7 @@ import type { InferOutputOrDefault, StandardSchemaV1 } from "./standard-schema";
 export type HookProps<ServerError, S extends StandardSchemaV1 | undefined, CVE, Data, FormContext = any> = {
 	errorMapProps?: ErrorMapperProps;
 	actionProps?: HookCallbacks<ServerError, S, CVE, Data>;
-	formProps?: Omit<UseFormProps<InferOutputOrDefault<S, any>, FormContext>, "resolver">;
+	formProps?: Omit<UseFormProps<InferInputOrDefault<S, any>, FormContext, InferOutputOrDefault<S, any>>, "resolver">;
 };
 
 /**
@@ -26,7 +26,7 @@ export type UseHookFormActionHookReturn<
 	FormContext = any,
 > = {
 	action: UseActionHookReturn<ServerError, S, CVE, Data>;
-	form: UseFormReturn<InferOutputOrDefault<S, any>, FormContext>;
+	form: UseFormReturn<InferInputOrDefault<S, any>, FormContext, InferOutputOrDefault<S, any>>;
 	handleSubmitWithAction: (e?: React.BaseSyntheticEvent) => Promise<void>;
 	resetFormAndAction: () => void;
 };

@@ -10,6 +10,9 @@ export function LoginForm() {
 		useHookFormAction(loginAction, zodResolver(loginSchema), {
 			formProps: {
 				mode: "onChange",
+				defaultValues: {
+					transformedValue: 123,
+				},
 			},
 			actionProps: {
 				onSuccess: () => {

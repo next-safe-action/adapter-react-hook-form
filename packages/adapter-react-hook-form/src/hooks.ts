@@ -46,7 +46,7 @@ export function useHookFormActionErrorMapper<S extends StandardSchemaV1 | undefi
  */
 export function useHookFormAction<ServerError, S extends StandardSchemaV1 | undefined, CVE, Data, FormContext = any>(
 	safeAction: HookSafeActionFn<ServerError, S, CVE, Data>,
-	hookFormResolver: Resolver<InferOutputOrDefault<S, any>, FormContext>,
+	hookFormResolver: Resolver<InferInputOrDefault<S, any>, FormContext, InferOutputOrDefault<S, any>>,
 	props?: HookProps<ServerError, S, CVE, Data, FormContext>
 ): UseHookFormActionHookReturn<ServerError, S, CVE, Data, FormContext> {
 	const action = useAction(safeAction, props?.actionProps);
@@ -56,7 +56,7 @@ export function useHookFormAction<ServerError, S extends StandardSchemaV1 | unde
 		props?.errorMapProps
 	);
 
-	const form = useForm<InferOutputOrDefault<S, any>, FormContext>({
+	const form = useForm<InferInputOrDefault<S, any>, FormContext, InferOutputOrDefault<S, any>>({
 		...props?.formProps,
 		resolver: hookFormResolver,
 		errors: hookFormValidationErrors,
@@ -96,7 +96,7 @@ export function useHookFormOptimisticAction<
 	FormContext = any,
 >(
 	safeAction: HookSafeActionFn<ServerError, S, CVE, Data>,
-	hookFormResolver: Resolver<InferOutputOrDefault<S, any>, FormContext>,
+	hookFormResolver: Resolver<InferInputOrDefault<S, any>, FormContext, InferOutputOrDefault<S, any>>,
 	props: HookProps<ServerError, S, CVE, Data, FormContext> & {
 		actionProps: {
 			currentState: State;
@@ -111,7 +111,7 @@ export function useHookFormOptimisticAction<
 		props.errorMapProps
 	);
 
-	const form = useForm<InferOutputOrDefault<S, any>, FormContext>({
+	const form = useForm<InferInputOrDefault<S, any>, FormContext, InferOutputOrDefault<S, any>>({
 		...props?.formProps,
 		resolver: hookFormResolver,
 		errors: hookFormValidationErrors,

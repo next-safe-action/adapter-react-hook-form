@@ -6,7 +6,7 @@ catalog:
   '@types/node': ^22
   '@types/react': ^19
   '@types/react-dom': ^19
-  next-safe-action: 8.0.0-beta.27
+  next-safe-action: 8.0.0
   postcss: ^8
   react-hook-form: ^7.56.4
   tailwindcss: ^3

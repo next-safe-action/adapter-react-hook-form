@@ -309,18 +309,10 @@ export type ErrorMapperProps = {
 Optional props for `useHookFormAction` and `useHookFormOptimisticAction`.
 
 ```typescript
-export type HookProps<
-	ServerError,
-	S extends Schema | undefined,
-	BAS extends readonly Schema[],
-	CVE,
-	CBAVE,
-	Data,
-	FormContext = any,
-> = {
+export type HookProps<ServerError, S extends StandardSchemaV1 | undefined, CVE, Data, FormContext = any> = {
 	errorMapProps?: ErrorMapperProps;
-	actionProps?: HookBaseUtils<S> & HookCallbacks<ServerError, S, BAS, CVE, CBAVE, Data>;
-	formProps?: Omit<UseFormProps<S extends Schema ? Infer<S> : any, FormContext>, "resolver">;
+	actionProps?: HookCallbacks<ServerError, S, CVE, Data>;
+	formProps?: Omit<UseFormProps<InferInputOrDefault<S, any>, FormContext, InferOutputOrDefault<S, any>>, "resolver">;
 };
 ```
 
@@ -331,15 +323,13 @@ Type of the return object of the `useHookFormAction` hook.
 ```typescript
 export type UseHookFormActionHookReturn<
 	ServerError,
-	S extends Schema | undefined,
-	BAS extends readonly Schema[],
+	S extends StandardSchemaV1 | undefined,
 	CVE,
-	CBAVE,
 	Data,
 	FormContext = any,
 > = {
-	action: UseActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data>;
-	form: UseFormReturn<S extends Schema ? Infer<S> : any, FormContext>;
+	action: UseActionHookReturn<ServerError, S, CVE, Data>;
+	form: UseFormReturn<InferInputOrDefault<S, any>, FormContext, InferOutputOrDefault<S, any>>;
 	handleSubmitWithAction: (e?: React.BaseSyntheticEvent) => Promise<void>;
 	resetFormAndAction: () => void;
 };
@@ -352,15 +342,13 @@ Type of the return object of the `useHookFormOptimisticAction` hook.
 ```typescript
 export type UseHookFormOptimisticActionHookReturn<
 	ServerError,
-	S extends Schema | undefined,
-	BAS extends readonly Schema[],
+	S extends StandardSchemaV1 | undefined,
 	CVE,
-	CBAVE,
 	Data,
 	State,
 	FormContext = any,
-> = Omit<UseHookFormActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, FormContext>, "action"> & {
-	action: UseOptimisticActionHookReturn<ServerError, S, BAS, CVE, CBAVE, Data, State>;
+> = Omit<UseHookFormActionHookReturn<ServerError, S, CVE, Data, FormContext>, "action"> & {
+	action: UseOptimisticActionHookReturn<ServerError, S, CVE, Data, State>;
 };
 ```
 

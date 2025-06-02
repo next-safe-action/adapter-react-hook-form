@@ -2,8 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useHookFormAction } from "@next-safe-action/adapter-react-hook-form/hooks";
-import { loginSchema } from "./login-validation";
 import { loginAction } from "./login-action";
+import { loginSchema } from "./login-validation";
 
 export function LoginForm() {
 	const { form, action, handleSubmitWithAction, resetFormAndAction } =
@@ -12,9 +12,16 @@ export function LoginForm() {
 				mode: "onChange",
 			},
 			actionProps: {
-				onSuccess: () => {
+				onSuccess: (args) => {
+					console.log("onSuccess called:", args);
 					window.alert("Logged in successfully!");
 					resetFormAndAction();
+				},
+				onNavigation: (args) => {
+					console.log("onNavigation called:", args);
+				},
+				onSettled: (args) => {
+					console.log("onSettled called:", args);
 				},
 			},
 		});

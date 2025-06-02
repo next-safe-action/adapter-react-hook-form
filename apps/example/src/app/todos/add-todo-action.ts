@@ -1,9 +1,9 @@
 "use server";
 
 import { ac } from "@/lib/safe-action";
-import { addTodoSchema } from "./add-todo-validation";
 import { returnValidationErrors } from "next-safe-action";
 import { revalidatePath } from "next/cache";
+import { addTodoSchema } from "./add-todo-validation";
 
 const todos = ["first todo"];
 
@@ -17,7 +17,7 @@ async function addTodo(newTodoContent: string) {
 }
 
 export const addTodoAction = ac
-	.schema(addTodoSchema)
+	.inputSchema(addTodoSchema)
 	.action(async ({ parsedInput }) => {
 		// Simulate a slow server
 		await new Promise((resolve) => setTimeout(resolve, 1000));

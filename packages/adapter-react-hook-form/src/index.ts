@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument */
 
 import type { ValidationErrors } from "next-safe-action";
-import type { Infer, Schema } from "next-safe-action/adapters/types";
 import type { FieldError, FieldErrors } from "react-hook-form";
 import type {} from "zod";
 import type { ErrorMapperProps } from "./index.types";
+import type { InferOutputOrDefault, StandardSchemaV1 } from "./standard-schema";
 
 /**
  * Maps a validation errors object to an object of `FieldErrors` compatible with react-hook-form.
  * You should only call this function directly for advanced use cases, and prefer exported hooks.
  */
-export function mapToHookFormErrors<S extends Schema | undefined>(
+export function mapToHookFormErrors<S extends StandardSchemaV1 | undefined>(
 	validationErrors: ValidationErrors<S> | undefined,
 	props?: ErrorMapperProps
 ) {
@@ -18,7 +18,7 @@ export function mapToHookFormErrors<S extends Schema | undefined>(
 		return undefined;
 	}
 
-	const fieldErrors: FieldErrors<S extends Schema ? Infer<S> : any> = {};
+	const fieldErrors: FieldErrors<InferOutputOrDefault<S, any>> = {};
 
 	function mapper(ve: Record<string, any>, paths: string[] = []) {
 		// Map through validation errors.
